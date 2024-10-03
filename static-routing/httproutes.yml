@@ -12,6 +12,12 @@ spec:
     - path:
         type: PathPrefix
         value: /canary 
+    filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: / 
     backendRefs:
      - name: argo-rollouts-stable-service
        kind: Service
@@ -33,6 +39,12 @@ spec:
     - path:
         type: PathPrefix
         value: /stable  
+    filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: / 
     backendRefs:
      - name: argo-rollouts-stable-service
        kind: Service
@@ -45,12 +57,18 @@ metadata:
 spec:
   parentRefs:
     - name: traefik-gateway
-      namespace: default
+      namespace: default 
   rules:
   - matches:
     - path:
         type: PathPrefix
         value: /preview  
+    filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /
     backendRefs:
      - name: argo-rollouts-canary-service
        kind: Service
