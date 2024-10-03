@@ -12,7 +12,13 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: /example/ 
+        value: /example/
+    filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /         
     backendRefs:
      - name: qa-service
        kind: Service
