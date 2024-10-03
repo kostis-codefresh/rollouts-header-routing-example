@@ -9,8 +9,34 @@
       <script src="https://unpkg.com/htmx.org@1.4.1"></script>
    </head>
    <body>
-       <h1> Request dashboard</h1>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <h1>Canary header selection</h1>
+      <p>How should we route your requests?</p>
+      <input type="radio" id="yes" name="want-canary" value="yes" hx-post="/clicked"
+      hx-trigger="click">
+      <label for="preview">Bleeding Edge! - (Always Preview)</label><br>
+      <input type="radio" id="no" name="want-canary" value="maybe" checked>
+      <label for="canary">Normal Canary</label><br>
+      <input type="radio" id="maybe" name="want-canary" value="no" >
+      <label for="stable">Stay safe! - (Always stable)</label>
+
+
+       <h2> Request dashboard (Updates every 3 seconds)</h2>
+      <div class="box" hx-headers='{"X-Canary": "yes"}' hx-get="callme" hx-trigger="every 3s">
+         <h2>Pod request</h2>
+      </div>
+      <div class="box" hx-headers='{"X-Canary": "maybe"}' hx-get="callme" hx-trigger="every 3s">
+         <h2>Pod request</h2>
+      </div>
+      <div class="box" hx-headers='{"X-Canary": "maybe"}' hx-get="callme" hx-trigger="every 3s">
+         <h2>Pod request</h2>
+      </div>
+      <div class="box" hx-headers='{"X-Canary": "maybe"}' hx-get="callme" hx-trigger="every 3s">
+         <h2>Pod request</h2>
+      </div>
+      <div class="box" hx-headers='{"X-Canary": "no"}' hx-get="callme" hx-trigger="every 3s">
+         <h2>Pod request</h2>
+      </div>
+      <!-- <div class="box" hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
       <div class="box" hx-get="callme" hx-trigger="every 3s">
@@ -42,22 +68,7 @@
       </div>
       <div class="box" hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
-      </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
-         <h2>Pod request</h2>
-      </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
-         <h2>Pod request</h2>
-      </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
-         <h2>Pod request</h2>
-      </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
-         <h2>Pod request</h2>
-      </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
-         <h2>Pod request</h2>
-      </div>
+      </div> -->
    </body>
 </html>
 
