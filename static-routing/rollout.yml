@@ -33,8 +33,8 @@ spec:
     spec:
       containers:
         - name: rollouts-demo
-          image: docker.io/kostiscodefresh/traefik-demo-app:main
-          # image: kostiscodefresh/summer-of-k8s-app:v1
+          # image: docker.io/kostiscodefresh/traefik-demo-app:main
+          image: kostiscodefresh/summer-of-k8s-app:v1
           # image: kostiscodefresh/summer-of-k8s-app:v2
           # image: kostiscodefresh/summer-of-k8s-app:v3           
           ports:

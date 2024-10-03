@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: my-example-route
+spec:
+  # hostnames:
+  # - localhost
+  parentRefs:
+    - name: traefik-gateway
+      namespace: default
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /example/ 
+    backendRefs:
+     - name: qa-service
+       kind: Service
+       port: 80
