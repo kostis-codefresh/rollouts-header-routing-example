@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"path"
+	"path/filepath"
 )
 
 func main() {
@@ -26,10 +28,19 @@ func main() {
 		fmt.Fprintln(w, "yes")
 	})
 
-	fs := http.FileServer(http.Dir("./static"))
-	http.Handle("/", fs)
+	http.HandleFunc("/", serveFiles)
 
 	fmt.Println("Listening now at port 8080")
 	err := http.ListenAndServe(":8080", nil)
 	log.Fatal(err)
+}
+
+func serveFiles(w http.ResponseWriter, r *http.Request) {
+	upath := r.URL.Path
+	p := "." + upath
+	fmt.Printf("Path:Upath is %s:%s\n", p, upath)
+
+	p = filepath.Join("./static/", path.Clean(upath))
+
+	http.ServeFile(w, r, p)
 }
