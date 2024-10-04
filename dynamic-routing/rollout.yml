@@ -10,8 +10,8 @@ spec:
       stableService: argo-rollouts-stable-service # our created stable service
       trafficRouting:
         managedRoutes:
-        - name: canary-route1
-        - name: canary-route2      
+        - name: always-stable-route
+        - name: always-preview-route      
         plugins:
           argoproj-labs/gatewayAPI:
             httpRoute: argo-rollouts-http-route # our created httproute
@@ -19,7 +19,7 @@ spec:
       steps:
         - setWeight: 50
         - setHeaderRoute:
-            name: canary-route1
+            name: always-preview-route
             match:
               - headerName: X-Canary
                 headerValue:
@@ -41,12 +41,12 @@ spec:
           # image: kostiscodefresh/summer-of-k8s-app:v1
           # image: kostiscodefresh/smart-rollout:latest          
           # image: kostiscodefresh/summer-of-k8s-app:v2
-          image: kostiscodefresh/summer-of-k8s-app:v2            
+          image: kostiscodefresh/smart-rollout:latest             
           env:
           - name: APP_VERSION
-            value: "2.0"
+            value: "1.0"
           - name: APP_COLOR
-            value: "#F1A94E" # Blue 44B3C2 and Yellow F1A94E and purple #c034eb
+            value: "#44B3C2" # Blue 44B3C2 and Yellow F1A94E and purple #c034eb
           ports:
             - name: http
               containerPort: 8080
