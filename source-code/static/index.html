@@ -13,11 +13,11 @@
       <p>How should we route your requests?</p>
 
       <form action="/" method="post">
-      <input type="radio" id="yes" name="want-canary" value="yes">
+      <input type="radio" id="yes" name="want-canary" value="yes" {{ .StatusYes }}>
       <label for="preview">Bleeding Edge! - (Always Preview)</label><br>
-      <input type="radio" id="no" name="want-canary" value="maybe" >
+      <input type="radio" id="no" name="want-canary" value="maybe" {{ .StatusMaybe }}>
       <label for="canary">Normal Canary</label><br>
-      <input type="radio" id="maybe" name="want-canary" value="no">
+      <input type="radio" id="maybe" name="want-canary" value="no" {{ .StatusNo }}>
       <label for="stable">Stay safe! - (Always stable)</label>
       <p>
       <input type="submit" value="Apply">
@@ -45,9 +45,6 @@
       <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <!-- <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
-         <h2>Pod request</h2>
-      </div>
       <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
@@ -77,7 +74,10 @@
       </div>
       <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
-      </div> -->
+      </div>
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
+         <h2>Pod request</h2>
+      </div>
    </body>
 </html>
 

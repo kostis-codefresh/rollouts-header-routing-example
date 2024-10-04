@@ -16,6 +16,10 @@ type SmartCanary struct {
 	CanaryHeaderName   string
 	CurrentHeaderValue string
 	TotalBoxes         int
+
+	StatusYes   string
+	StatusMaybe string
+	StatusNo    string
 }
 
 func main() {
@@ -63,7 +67,7 @@ func main() {
 func (smartCanary *SmartCanary) serveFiles(w http.ResponseWriter, r *http.Request) {
 	upath := r.URL.Path
 	p := "." + upath
-	fmt.Printf("Path:Upath is %s:%s\n", p, upath)
+	// fmt.Printf("Path:Upath is %s:%s\n", p, upath)
 
 	if p == "./" {
 		smartCanary.home(w, r)
@@ -81,6 +85,7 @@ func (smartCanary *SmartCanary) home(w http.ResponseWriter, r *http.Request) {
 	newCanaryValue := r.Form.Get("want-canary")
 	smartCanary.CurrentHeaderValue = newCanaryValue
 	fmt.Printf("New Canary choice %s\n", smartCanary.CurrentHeaderValue)
+	smartCanary.updateSelectedRadio()
 
 	t, err := template.ParseFiles("./static/index.html")
 	if err != nil {
@@ -94,4 +99,19 @@ func (smartCanary *SmartCanary) home(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error executing template: %v", err)
 		return
 	}
+}
+
+func (smartCanary *SmartCanary) updateSelectedRadio() {
+	smartCanary.StatusYes = ""
+	smartCanary.StatusMaybe = ""
+	smartCanary.StatusNo = ""
+
+	if smartCanary.CurrentHeaderValue == "yes" {
+		smartCanary.StatusYes = "checked"
+	} else if smartCanary.CurrentHeaderValue == "maybe" {
+		smartCanary.StatusMaybe = "checked"
+	} else if smartCanary.CurrentHeaderValue == "no" {
+		smartCanary.StatusNo = "checked"
+	}
+
 }
