@@ -19,6 +19,9 @@
       <input type="radio" id="maybe" name="want-canary" value="no" >
       <label for="stable">Stay safe! - (Always stable)</label>
 
+      <p>
+         Current Header <code> {{ .CanaryHeaderName }}: {{ .CurrentHeaderValue }} </code>
+      </p>
 
        <h2> Request dashboard (Updates every 3 seconds)</h2>
       <div class="box" hx-headers='{"X-Canary": "yes"}' hx-get="callme" hx-trigger="every 3s">
