@@ -16,10 +16,12 @@ spec:
     spec:
       containers:
       - name: webserver-simple
-        imagePullPolicy: Always
-        # image: docker.io/kostiscodefresh/traefik-demo-app:main
-        # image: docker.io/kostiscodefresh/smart-rollout:latest      
-        image: kostiscodefresh/summer-of-k8s-app:v1
-        # image: kennethreitz/httpbin
+        imagePullPolicy: Always     
+        image: docker.io/kostiscodefresh/smart-rollout:latest           
+        env:
+          - name: APP_VERSION
+            value: "2.0"
+          - name: APP_COLOR
+            value: "#F1A94E" # Blue 44B3C2 and Yellow F1A94E and purple #c034eb
         ports:
         - containerPort: 8080
