@@ -11,16 +11,19 @@
    <body>
       <h1>Canary header selection</h1>
       <p>How should we route your requests?</p>
-      <input type="radio" id="yes" name="want-canary" value="yes" hx-post="/clicked"
-      hx-trigger="click">
+      <input type="radio" id="yes" name="want-canary" value="yes" hx-post="/yes"
+      hx-trigger="click" hx-target="#CurrentHeaderValue">
       <label for="preview">Bleeding Edge! - (Always Preview)</label><br>
-      <input type="radio" id="no" name="want-canary" value="maybe" checked>
+      <input type="radio" id="no" name="want-canary" value="maybe" hx-post="/maybe"
+      hx-trigger="click" hx-target="#CurrentHeaderValue">
       <label for="canary">Normal Canary</label><br>
-      <input type="radio" id="maybe" name="want-canary" value="no" >
+      <input type="radio" id="maybe" name="want-canary" value="no" hx-post="/no"
+      hx-trigger="click" hx-target="#CurrentHeaderValue">
       <label for="stable">Stay safe! - (Always stable)</label>
 
       <p>
-         Current Header <code> {{ .CanaryHeaderName }}: {{ .CurrentHeaderValue }} </code>
+         Current Header 
+         <code> {{ .CanaryHeaderName }}: <span id="CurrentHeaderValue"> {{ .CurrentHeaderValue }}  </span></code>
       </p>
 
        <h2> Request dashboard (Updates every 3 seconds)</h2>

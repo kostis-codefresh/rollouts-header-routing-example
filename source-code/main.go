@@ -51,6 +51,20 @@ func main() {
 		fmt.Fprintln(w, "yes")
 	})
 
+	//User selection for canary choice
+	http.HandleFunc("/yes", func(w http.ResponseWriter, r *http.Request) {
+		smartCanary.CurrentHeaderValue = "yes"
+		fmt.Fprintf(w, smartCanary.CurrentHeaderValue)
+	})
+	http.HandleFunc("/maybe", func(w http.ResponseWriter, r *http.Request) {
+		smartCanary.CurrentHeaderValue = "maybe"
+		fmt.Fprintf(w, smartCanary.CurrentHeaderValue)
+	})
+	http.HandleFunc("/no", func(w http.ResponseWriter, r *http.Request) {
+		smartCanary.CurrentHeaderValue = "no"
+		fmt.Fprintf(w, smartCanary.CurrentHeaderValue)
+	})
+
 	http.HandleFunc("/", smartCanary.serveFiles)
 
 	fmt.Println("Listening now at port 8080")
