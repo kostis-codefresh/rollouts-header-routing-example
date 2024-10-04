@@ -9,21 +9,27 @@ spec:
       canaryService: argo-rollouts-canary-service # our created canary service
       stableService: argo-rollouts-stable-service # our created stable service
       trafficRouting:
-        managedRoutes:
+        managedRoutes: 
+        - name: always-preview-route
         - name: always-stable-route
-        - name: always-preview-route      
         plugins:
           argoproj-labs/gatewayAPI:
-            httpRoute: argo-rollouts-http-route # our created httproute
+            httpRoute: my-smart-route # our created httproute
             namespace: default # namespace where this rollout resides
       steps:
-        - setWeight: 50
+        - setHeaderRoute:
+            name: always-stable-route
+            match:
+              - headerName: X-Canary
+                headerValue:
+                  exact: "no"  
+        - setWeight: 50                         
         - setHeaderRoute:
             name: always-preview-route
             match:
               - headerName: X-Canary
                 headerValue:
-                  exact: "yes"         
+                  exact: "yes" 
         - pause: {}
         - setWeight: 100
   revisionHistoryLimit: 2
@@ -44,9 +50,9 @@ spec:
           image: kostiscodefresh/smart-rollout:latest             
           env:
           - name: APP_VERSION
-            value: "1.0"
+            value: "3.0"
           - name: APP_COLOR
-            value: "#44B3C2" # Blue 44B3C2 and Yellow F1A94E and purple #c034eb
+            value: "#c034eb" # Blue 44B3C2 and Yellow F1A94E and purple #c034eb
           ports:
             - name: http
               containerPort: 8080
