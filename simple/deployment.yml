@@ -25,3 +25,11 @@ spec:
             value: "#F1A94E" # Blue 44B3C2 and Yellow F1A94E and purple #c034eb
         ports:
         - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8080  
