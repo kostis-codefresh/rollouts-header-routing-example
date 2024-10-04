@@ -15,6 +15,7 @@ type SmartCanary struct {
 	AppColor           string
 	CanaryHeaderName   string
 	CurrentHeaderValue string
+	TotalBoxes         int
 }
 
 func main() {
@@ -26,6 +27,7 @@ func main() {
 
 	smartCanary := SmartCanary{}
 	smartCanary.CanaryHeaderName = "X-Canary"
+	smartCanary.TotalBoxes = 16
 
 	smartCanary.AppVersion = os.Getenv("APP_VERSION")
 	if len(smartCanary.AppVersion) == 0 {
@@ -51,20 +53,6 @@ func main() {
 		fmt.Fprintln(w, "yes")
 	})
 
-	//User selection for canary choice
-	http.HandleFunc("/yes", func(w http.ResponseWriter, r *http.Request) {
-		smartCanary.CurrentHeaderValue = "yes"
-		fmt.Fprintf(w, smartCanary.CurrentHeaderValue)
-	})
-	http.HandleFunc("/maybe", func(w http.ResponseWriter, r *http.Request) {
-		smartCanary.CurrentHeaderValue = "maybe"
-		fmt.Fprintf(w, smartCanary.CurrentHeaderValue)
-	})
-	http.HandleFunc("/no", func(w http.ResponseWriter, r *http.Request) {
-		smartCanary.CurrentHeaderValue = "no"
-		fmt.Fprintf(w, smartCanary.CurrentHeaderValue)
-	})
-
 	http.HandleFunc("/", smartCanary.serveFiles)
 
 	fmt.Println("Listening now at port 8080")
@@ -88,6 +76,11 @@ func (smartCanary *SmartCanary) serveFiles(w http.ResponseWriter, r *http.Reques
 }
 
 func (smartCanary *SmartCanary) home(w http.ResponseWriter, r *http.Request) {
+
+	r.ParseForm()
+	newCanaryValue := r.Form.Get("want-canary")
+	smartCanary.CurrentHeaderValue = newCanaryValue
+	fmt.Printf("New Canary choice %s\n", smartCanary.CurrentHeaderValue)
 
 	t, err := template.ParseFiles("./static/index.html")
 	if err != nil {

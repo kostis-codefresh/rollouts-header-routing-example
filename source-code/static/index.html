@@ -11,68 +11,71 @@
    <body>
       <h1>Canary header selection</h1>
       <p>How should we route your requests?</p>
-      <input type="radio" id="yes" name="want-canary" value="yes" hx-post="/yes"
-      hx-trigger="click" hx-target="#CurrentHeaderValue">
+
+      <form action="/" method="post">
+      <input type="radio" id="yes" name="want-canary" value="yes">
       <label for="preview">Bleeding Edge! - (Always Preview)</label><br>
-      <input type="radio" id="no" name="want-canary" value="maybe" hx-post="/maybe"
-      hx-trigger="click" hx-target="#CurrentHeaderValue">
+      <input type="radio" id="no" name="want-canary" value="maybe" >
       <label for="canary">Normal Canary</label><br>
-      <input type="radio" id="maybe" name="want-canary" value="no" hx-post="/no"
-      hx-trigger="click" hx-target="#CurrentHeaderValue">
+      <input type="radio" id="maybe" name="want-canary" value="no">
       <label for="stable">Stay safe! - (Always stable)</label>
+      <p>
+      <input type="submit" value="Apply">
+      </p>
+      </form>
 
       <p>
          Current Header 
          <code> {{ .CanaryHeaderName }}: <span id="CurrentHeaderValue"> {{ .CurrentHeaderValue }}  </span></code>
       </p>
 
-       <h2> Request dashboard (Updates every 3 seconds)</h2>
-      <div class="box" hx-headers='{"X-Canary": "yes"}' hx-get="callme" hx-trigger="every 3s">
+       <h2> Request dashboard (Updates every 3 seconds) <img   src="bars.svg"/></h2>
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-headers='{"X-Canary": "maybe"}' hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-headers='{"X-Canary": "maybe"}' hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-headers='{"X-Canary": "maybe"}' hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-headers='{"X-Canary": "no"}' hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <!-- <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <!-- <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div>
-      <div class="box" hx-get="callme" hx-trigger="every 3s">
+      <div class="box" hx-headers='{"{{ .CanaryHeaderName }}": "{{ .CurrentHeaderValue }}"}' hx-get="callme" hx-trigger="every 3s">
          <h2>Pod request</h2>
       </div> -->
    </body>
