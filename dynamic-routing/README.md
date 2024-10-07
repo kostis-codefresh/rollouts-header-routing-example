@@ -1,15 +1,14 @@
-Instruqtions
+# Header based example
 
 Install Argo Rollouts on Cluster
-with Traefik 3.x and Gateway plugin 0.4.0
+with Traefik 3.x and Gateway plugin 0.4.0 as described in the
+README of the `traefik-setup` folder.
 
-
-Apply Roles in static-routing/cluster-role and cluster-role-binding
 
 Create main route
 
 ```
-kubectl apply -f all-routes.yml
+kubectl apply -f smart-route.yml
 ```
 
 Create rollout 
@@ -21,22 +20,21 @@ kubectl apply -f rollout.yml
 Test that nothing is happening and all calls see version 1
 
 ```
-curl http://localhost/smart/callme
-curl -H "X-Canary: yes" http://localhost/smart/callme
-curl -H "X-Canary: no" http://localhost/smart/callme
+curl http://localhost/callme
+curl -H "X-Canary: yes" http://localhost/callme
+curl -H "X-Canary: maybe" http://localhost/callme
 ```
 
-Then edit Rollout and change line 51 APP_VERSION to 2.0
+Then edit Rollout and change line 51 APP_VERSION to 2.0 and line APP_COLOR to something else.
 
 Apply the manifest again to start a canary process
 
 Then try again 
 
 ```
-curl http://localhost/smart/callme
-curl -H "X-Canary: yes" http://localhost/smart/callme
-curl -H "X-Canary: no" http://localhost/smart/callme
+curl -H "X-Canary: yes" http://localhost/callme
+curl -H "X-Canary: maybe" http://localhost/callme
 ```
 
-The first two call will succeed. 
-The last one fails with 404 (which is the one match by the header route)
+You will see that the first call always goes to the new version
+while the second one will go to either version.
