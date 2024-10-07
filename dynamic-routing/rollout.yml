@@ -25,7 +25,7 @@ spec:
               - headerName: X-Canary
                 headerValue:
                   exact: "yes"  
-        - setWeight: 50                         
+        - setWeight: 25                         
         # - setHeaderRoute:
         #     name: always-preview-route
         #     match:

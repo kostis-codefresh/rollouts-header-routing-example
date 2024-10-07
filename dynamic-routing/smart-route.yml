@@ -11,13 +11,14 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: /smart/ 
-    filters:
-      - type: URLRewrite
-        urlRewrite:
-          path:
-            type: ReplacePrefixMatch
-            replacePrefixMatch: / 
+        value: /     
+        # value: /smart/ 
+    # filters:
+    #   - type: URLRewrite
+    #     urlRewrite:
+    #       path:
+    #         type: ReplacePrefixMatch
+    #         replacePrefixMatch: / 
     backendRefs:
      - name: argo-rollouts-stable-service
        kind: Service
