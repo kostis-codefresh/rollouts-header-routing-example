@@ -201,79 +201,11 @@ Apply both file with kubectl.
 
 ## Step 6 - Create an example Rollout
 
-We can finally create the definition of the application.
+See folder `static-routing` for 3 static URLs
 
-```yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
-metadata:
-  name: rollouts-demo
-spec:
-  replicas: 5
-  strategy:
-    canary:
-      canaryService: argo-rollouts-canary-service # our created canary service
-      stableService: argo-rollouts-stable-service # our created stable service
-      trafficRouting:
-        plugins:
-          argoproj-labs/gatewayAPI:
-            httpRoute: argo-rollouts-http-route # our created httproute
-            namespace: default # namespace where this rollout resides.
-      steps:
-        - setWeight: 30
-        - pause: {}
-        - setWeight: 40
-        - pause: { duration: 10 }
-        - setWeight: 60
-        - pause: { duration: 10 }
-        - setWeight: 80
-        - pause: { duration: 10 }
-  revisionHistoryLimit: 2
-  selector:
-    matchLabels:
-      app: rollouts-demo
-  template:
-    metadata:
-      labels:
-        app: rollouts-demo
-    spec:
-      containers:
-        - name: rollouts-demo
-          image: argoproj/rollouts-demo:red
-          ports:
-            - name: http
-              containerPort: 8080
-              protocol: TCP
-          resources:
-            requests:
-              memory: 32Mi
-              cpu: 5m
-```
+See folder `dynamic-routing` for a header-based example.
 
-Apply the file with kubectl
 
-You can check the Rollout status with 
-
-```
-kubectl argo rollouts get rollout rollouts-demo
-```
-
-Once the application is deployed you can visit your browser at `localhost`
-or whatever is the IP of your loadbalancer.
-
-## Step 8 - Test the canary
-
-Change the Rollout YAML and use a different color for `argoproj/rollouts-demo` image such as red or green.
-
-Apply the `rollout.yml` file again and the Gateway plugin will split the traffic to your canary by instructing Traefik proxy via the Gateway API.
-
-You should see the rollout with multiple colors in your browser.
-
-You can also monitor the canary with from the command line with:
-
-```
-watch kubectl argo rollouts get rollout rollouts-demo
-```
 
 Finished!
 

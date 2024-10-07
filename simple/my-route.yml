@@ -3,8 +3,6 @@ kind: HTTPRoute
 metadata:
   name: my-example-route
 spec:
-  # hostnames:
-  # - localhost
   parentRefs:
     - name: traefik-gateway
       namespace: default
