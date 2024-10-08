@@ -25,7 +25,7 @@ at `simple` folder. Then visit `http://localhost/example/` to see the applicatio
 ## Static routing example
 
 Apply the manifests in the `static-routing` folder. Then start a canary
-by editing the `rolllout.yml` file and change the docker image to different tags.
+by editing the `rollout.yml` file and change the docker image to different tags.
 
 Then visit the 3 urls
 
@@ -36,7 +36,7 @@ Then visit the 3 urls
 ## Dynamic routing example
 
 Apply the manifests in the `dynamic-routing` folder. Then start a canary
-by editing the `rolllout.yml` file and change the APP_VERSION and APP_COLOR to start a canary
+by editing the `rollout.yml` file and change the APP_VERSION and APP_COLOR to start a canary
 
 Then visit `http://localhost` and see that if you change the active header on the UI, the application can be forced to be part of the canary.
 

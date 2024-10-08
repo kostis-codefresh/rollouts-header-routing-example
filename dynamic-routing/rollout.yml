@@ -37,14 +37,14 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: rollouts-demo
+      app: smart-rollouts-demo
   template:
     metadata:
       labels:
-        app: rollouts-demo
+        app: smart-rollouts-demo
     spec:
       containers:
-        - name: rollouts-demo
+        - name: smart-rollouts-demo
           image: kostiscodefresh/smart-rollout:latest             
           env:
           - name: APP_VERSION
