@@ -37,11 +37,11 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: smart-rollouts-demo
+      app: rollouts-demo
   template:
     metadata:
       labels:
-        app: smart-rollouts-demo
+        app: rollouts-demo
     spec:
       containers:
         - name: smart-rollouts-demo
