@@ -25,11 +25,11 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: rollouts-demo
+      app: static-rollouts-demo
   template:
     metadata:
       labels:
-        app: rollouts-demo
+        app: static-rollouts-demo
     spec:
       containers:
         - name: static-rollouts-demo

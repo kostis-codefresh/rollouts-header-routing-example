@@ -6,8 +6,8 @@ spec:
   replicas: 5
   strategy:
     canary:
-      canaryService: argo-rollouts-canary-service # our created canary service
-      stableService: argo-rollouts-stable-service # our created stable service
+      canaryService: smart-canary-service # our created canary service
+      stableService: smart-stable-service # our created stable service
       trafficRouting:
         managedRoutes: 
         - name: always-preview
@@ -37,11 +37,11 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: rollouts-demo
+      app: smart-rollouts-demo
   template:
     metadata:
       labels:
-        app: rollouts-demo
+        app: smart-rollouts-demo
     spec:
       containers:
         - name: smart-rollouts-demo

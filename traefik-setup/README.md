@@ -161,45 +161,7 @@ kubectl apply -f cluster-role.yaml
 kubectl apply -f cluster-role-binding.yaml
 ```
 
-## Step 5 - Create canary and stable services for your application
-
-- Canary service
-
-```yaml title="canary.yml"
-apiVersion: v1
-kind: Service
-metadata:
-  name: argo-rollouts-canary-service
-spec:
-  ports:
-    - port: 80
-      targetPort: http
-      protocol: TCP
-      name: http
-  selector:
-    app: rollouts-demo
-```
-
-- Stable service
-
-```yaml title="stable.yml"
-apiVersion: v1
-kind: Service
-metadata:
-  name: argo-rollouts-stable-service
-spec:
-  ports:
-    - port: 80
-      targetPort: http
-      protocol: TCP
-      name: http
-  selector:
-    app: rollouts-demo
-```
-
-Apply both file with kubectl.
-
-## Step 6 - Create an example Rollout
+## Step 5 - Create an example Rollout
 
 See folder `static-routing` for 3 static URLs
 

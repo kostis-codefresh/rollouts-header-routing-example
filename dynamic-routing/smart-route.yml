@@ -19,9 +19,9 @@ spec:
     #         type: ReplacePrefixMatch
     #         replacePrefixMatch: / 
     backendRefs:
-     - name: argo-rollouts-stable-service
+     - name: smart-stable-service
        kind: Service
        port: 80
-     - name: argo-rollouts-canary-service
+     - name: smart-canary-service
        kind: Service
        port: 80 
