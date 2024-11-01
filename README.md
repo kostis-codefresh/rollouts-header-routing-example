@@ -29,9 +29,15 @@ by editing the `rollout.yml` file and change the docker image to different tags.
 
 Then visit the 3 urls
 
-* `http://localhost/stable` This is always old version
-* `http://localhost/canary` This is active canary version
-* `http://localhost/preview` This is always new  version
+* `http://localhost/stable/` This is always old version
+* `http://localhost/canary/` This is active canary version
+* `http://localhost/preview/` This is always new  version
+
+You can inspect the rollout with
+
+```
+kubectl argo rollouts get rollout static-rollouts-demo
+```
 
 ## Dynamic routing example
 
@@ -39,6 +45,12 @@ Apply the manifests in the `dynamic-routing` folder. Then start a canary
 by editing the `rollout.yml` file and change the APP_VERSION and APP_COLOR to start a canary
 
 Then visit `http://localhost` and see that if you change the active header on the UI, the application can be forced to be part of the canary.
+
+You can inspect the rollout with
+
+```
+kubectl argo rollouts get rollout smart-rollouts-demo
+```
 
 
 
