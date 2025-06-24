@@ -52,6 +52,10 @@ You can inspect the rollout with
 kubectl argo rollouts get rollout smart-rollouts-demo
 ```
 
+## Kubecon Presentation for Header Based Routing
+
+If you prefer video format see the [Kubecon Presentation](https://www.youtube.com/watch?v=95OFqU4UjiE). 
+
 
 
 
