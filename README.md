@@ -7,7 +7,7 @@ via the Gateway API
 2. Example with [static routes for preview/stable/canary](static-routing)
 3. Example with [header based routing](dynamic-routing).
 
-Read the full blog at TDB
+Read the full blog at [https://codefresh.io/blog/argo-rollouts-header-based-routing/](https://codefresh.io/blog/argo-rollouts-header-based-routing/)
 
 ## Traefik setup
 
