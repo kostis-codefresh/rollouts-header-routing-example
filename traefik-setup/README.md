@@ -130,38 +130,7 @@ kubectl apply -f cluster-role.yml
 kubectl apply -f cluster-role-binding.yml
 ```
 
-## Step 4 - Create HTTPRoute that defines a traffic split
-
-Create HTTPRoute and connect to the created Gateway resource
-
-```yaml
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: HTTPRoute
-metadata:
-  name: argo-rollouts-http-route
-spec:
-  parentRefs:
-    - name: argo-rollouts-gateway
-  rules:
-    - backendRefs:
-        - name: argo-rollouts-stable-service
-          port: 80
-        - name: argo-rollouts-canary-service
-          port: 80
-```
-
-Note that this route is accessible the route prefix `/` in your browser
-simply by visiting your Loadbalancer IP address.
-
-
-Apply it with:
-
-```shell
-kubectl apply -f cluster-role.yaml
-kubectl apply -f cluster-role-binding.yaml
-```
-
-## Step 5 - Create an example Rollout
+## Step 4 - Create an example Rollout
 
 See folder `static-routing` for 3 static URLs
 
