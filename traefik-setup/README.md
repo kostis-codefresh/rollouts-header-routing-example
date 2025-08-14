@@ -12,6 +12,17 @@ Versions used
 
 Note that Argo Rollouts also [supports Traefik natively](https://argoproj.github.io/argo-rollouts/features/traffic-management/traefik/).
 
+## Step 0 - Install Argo Rollouts and Gateway API plugin
+
+```
+kubectl create namespace argo-rollouts
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/download/v1.7.2/install.yaml
+kubectl apply -f gateway-plugin.yml -n argo-rollouts
+kubectl rollout restart deployment -n argo-rollouts argo-rollouts
+```
+
+Check the Argo Rollouts controller logs to see `Downloading plugin argoproj-labs/gatewayAPI from...`
+
 ## Step 1 - Enable Gateway Provider and create Gateway entrypoint
 
 First let's install Traefik as a Gateway provider. Follow the official [installation instructions](https://doc.traefik.io/traefik/getting-started/install-traefik/).
@@ -132,9 +143,9 @@ kubectl apply -f cluster-role-binding.yml
 
 ## Step 4 - Create an example Rollout
 
-See folder `static-routing` for 3 static URLs
+See folder [static-routing](../static-routing) for 3 static URLs
 
-See folder `dynamic-routing` for a header-based example.
+See folder [dynamic-routing](../dynamic-routing) for a header-based example.
 
 
 
